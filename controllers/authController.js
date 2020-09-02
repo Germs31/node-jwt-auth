@@ -10,7 +10,7 @@ const handleErrors = err => {
         return errors;
     }
 
-    if(err.message.inculdes('user validation failed')) {
+    if(err.message.includes('user validation failed')) {
         Object.values(err.errors).forEach(({properties}) => {
             errors[properties.path] = properties.message
         })
@@ -49,7 +49,7 @@ module.exports.signup_post = async (req, res) => {
         res.status(201).json({user: user._id});
     } catch (error) {
         const errors = handleErrors(error)
-        res.status(400).jason({errors})
+        res.status(400).json({errors})
     }
 }
 

@@ -27,8 +27,18 @@
                 method: 'POST',
                 body: JSON.stringify({email,password}),
                 headers: { 'Content-Type': 'application/json' }
-            })
-            console.log(res)
+            });
+
+            const data = await res.json();
+            console.log(data);
+            if(data.error){
+                console.log('hit')
+                emailError.textContent = data.error.email;
+                passwordError.textContent = data.error.password;
+            }
+            if (data.user) {
+                location.assign('/')
+            }
         } catch (error) {
             console.log(error)
         }
